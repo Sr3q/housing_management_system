@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('employee_id')->nullable();
+            $table->unsignedBigInteger('emp_id')->nullable();
             $table->string('english_name')->nullable();
             $table->string('arabic_name')->nullable();
             $table->string('type')->nullable();
@@ -56,9 +56,6 @@ return new class extends Migration
             $table->string('religion')->nullable();
             $table->string('erf_no')->nullable();
             $table->timestamps();
-
-            $table->unsignedBigInteger('room_id')->nullable();
-            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('set null');
         });
     }
 
