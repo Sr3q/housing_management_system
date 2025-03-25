@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('supplies', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->string('image_path')->nullable();
             $table->date('expiry_date')->nullable();
             $table->timestamps();
         });

@@ -55,6 +55,10 @@ return new class extends Migration
             $table->string('cost_pool')->nullable();
             $table->string('religion')->nullable();
             $table->string('erf_no')->nullable();
+
+            $table->string('start_work')->nullable();
+            $table->string('end_work')->nullable();
+
             $table->timestamps();
         });
     }

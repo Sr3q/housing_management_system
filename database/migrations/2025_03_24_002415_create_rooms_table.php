@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('room_number');  // رقم
+            $table->string('room_number');  // رقم
             $table->unsignedBigInteger('flat_id')->nullable();
             $table->unsignedBigInteger('housing_id')->nullable();      // رقم البناء (مفتاح خارجي)
+            $table->integer('capacity')->default(1);
+            $table->enum('status', ['vacant', 'occupied', 'maintenance'])->default('vacant');
             $table->timestamps();
 
             // ربط رقم البناء بجدول البنايات (buildings)

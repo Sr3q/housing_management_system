@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('password');
 
-            $table->enum('role', ['admin', 'super_admin'])->default('admin');
             $table->unsignedBigInteger('company_id')->nullable();
 
             $table->rememberToken();
