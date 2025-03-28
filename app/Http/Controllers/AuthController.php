@@ -2,37 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
+use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class AuthController extends Controller
 {
+    use GeneralTrait;
+
     public function login(Request $request)
     {
-        // التحقق من صحة البيانات الواردة
-        $request->validate([
-            'username' => 'required|string',
-            'password' => 'required'
-        ]);
+        try {
+            // التحقق من صحة البيانات الواردة
+            $request->validate([
+                'username' => 'required|string',
+                'password' => 'required'
+            ]);
 
-        // البحث عن المستخدم باستخدام اسم المستخدم
-        $user = User::where('username', $request->username)->first();
+            // البحث عن المستخدم باستخدام اسم المستخدم
+            $user = User::where('username', $request->username)->first();
+            $user->load('roles');
 
-        // التحقق من صحة كلمة المرور
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return response()->json([
-                'message' => 'بيانات الاعتماد غير صحيحة'
-            ], 401);
+            // التحقق من صحة كلمة المرور
+            if (!$user || !Hash::check($request->password, $user->password)) {
+                return $this->returnError(401, "Wrong username or password!");
+            }
+
+            // إنشاء توكن جديد باستخدام Sanctum
+            $token = $user->createToken($user->name)->plainTextToken;
+
+            $user = UserResource::make($user, $token);
+
+            // إعادة التوكن للمستخدم
+            return $this->returnData('data', $user);
+        } catch (\Exception $ex) {
+            return $this->returnError(500, $ex->getMessage());
         }
-
-        // إنشاء توكن جديد باستخدام Sanctum
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        // إعادة التوكن للمستخدم
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'Bearer'
-        ]);
     }
 }
