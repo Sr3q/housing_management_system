@@ -15,3 +15,7 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::post('/login', [AuthController::class, 'login']);
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum', 'admin']], function () {
+    Route::post('/add-admin',[AuthController::class, 'addAdmin']);
+});
