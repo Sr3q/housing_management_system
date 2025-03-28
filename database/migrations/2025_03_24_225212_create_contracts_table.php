@@ -15,16 +15,16 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('housing_id');
             $table->decimal('monthly_rent', 10, 2);
-            $table->string('owner_name')->nullable();               // اسم المالك
-            $table->string('owner_representative')->nullable();     // اسم ممثل المالك الذي يتم التواصل معه
-            $table->string('contact_number')->nullable();           // رقم التواصل
-            $table->text('note')->nullable();                       // ملاحظة
-            $table->date('start_date')->nullable();                 // تاريخ البدء
-            $table->date('expiry_date')->nullable();                // تاريخ الانتهاء
-            $table->string('duration_of_contract')->nullable();     // مدة العقد
+            $table->string('owner_name')->nullable();
+            $table->string('owner_representative')->nullable();
+            $table->string('contact_number')->nullable();
+            $table->text('note')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('expiry_date')->nullable();
+            $table->string('duration_of_contract')->nullable();
             $table->timestamps();
 
-            $table->foreign('housing_id')->references('id')->on('housing')->onDelete('cascade');
+            $table->foreign('housing_id')->references('id')->on('housing');
         });
     }
 

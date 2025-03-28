@@ -13,19 +13,21 @@ return new class extends Migration
     {
         Schema::create('housing', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('company_id')->nullable(); // مرجع إلى جدول الشركات (nullable)
-            $table->string('name')->nullable();       // اسم الإقامة
-            $table->string('location')->nullable();                 // الموقع
-            $table->unsignedInteger('number_of_flats')->nullable(); // عدد الشقق
-            $table->unsignedInteger('number_of_rooms')->nullable(); // عدد الغرف
-            $table->unsignedInteger('building_capacity')->nullable(); // سعة المبنى
-            $table->string('ownership_type')->nullable();           // نوع الملكية
+            $table->unsignedBigInteger('company_id')->nullable();
+            $table->string('name')->nullable();
+            $table->string('location')->nullable();
+            $table->unsignedInteger('number_of_flats')->nullable();
+            $table->unsignedInteger('number_of_rooms')->nullable();
+            $table->unsignedInteger('building_capacity')->nullable();
+            $table->string('ownership_type')->nullable();
             $table->enum('type', ['single', 'family'])->default('single');
             $table->enum('status', ['active', 'maintenance', 'inactive'])->default('active');
-            $table->text('note')->nullable();                       // ملاحظة
+            $table->text('note')->nullable();
             $table->timestamps();
 
-            // قيد المفتاح الخارجي مع السماح بالـ null
+            $table->softDeletes();
+
+
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('set null');
         });
     }

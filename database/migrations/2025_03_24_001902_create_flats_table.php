@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('flats', function (Blueprint $table) {
             $table->id();
-            $table->string('flat_number');  // رقم الشقة
-            $table->unsignedBigInteger('housing_id');      // رقم البناء (مفتاح خارجي)
+            $table->string('flat_number');
+            $table->unsignedBigInteger('housing_id');
             $table->float('area')->nullable();
             $table->integer('number_of_rooms')->default(0);
             $table->integer('number_of_bathrooms')->default(0);
@@ -22,8 +22,9 @@ return new class extends Migration
             $table->enum('status', ['vacant', 'occupied', 'maintenance'])->default('vacant');
             $table->timestamps();
 
-            // ربط رقم البناء بجدول البنايات (buildings)
-            $table->foreign('housing_id')->references('id')->on('housing')->onDelete('cascade');
+            $table->softDeletes();
+
+            $table->foreign('housing_id')->references('id')->on('housing');
         });
     }
 

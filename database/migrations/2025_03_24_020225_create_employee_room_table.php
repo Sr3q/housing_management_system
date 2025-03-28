@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('employee_room', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('employee_id')->nullable();
-            $table->unsignedBigInteger('room_id')->nullable();
+            $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('room_id');
             $table->string('note')->nullable();
-            $table->date('entry_date')->nullable();
+            $table->date('entry_date');
             $table->date('exit_date')->nullable();
             $table->timestamps();
 
-            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
-            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
+            $table->foreign('employee_id')->references('id')->on('employees');
+            $table->foreign('room_id')->references('id')->on('rooms');
         });
     }
 

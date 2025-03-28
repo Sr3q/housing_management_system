@@ -59,6 +59,8 @@ return new class extends Migration
             $table->string('start_work')->nullable();
             $table->string('end_work')->nullable();
 
+            $table->softDeletes();
+
             $table->timestamps();
         });
     }

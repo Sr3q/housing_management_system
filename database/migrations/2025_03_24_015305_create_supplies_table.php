@@ -13,10 +13,15 @@ return new class extends Migration
     {
         Schema::create('supplies', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('company_id')->nullable();
             $table->string('name')->nullable();
             $table->string('image_path')->nullable();
             $table->date('expiry_date')->nullable();
             $table->timestamps();
+
+            $table->softDeletes();
+
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('set null');
         });
     }
 

@@ -23,8 +23,7 @@ return new class extends Migration
             // Add the foreign key constraint
             $table->foreign('housing_id')
                 ->references('id')
-                ->on('housing')
-                ->onDelete('cascade');  // When an accommodation is deleted, its attachments are deleted too
+                ->on('housing');
         });
     }
 

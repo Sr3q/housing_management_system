@@ -16,13 +16,13 @@ return new class extends Migration
             $table->unsignedBigInteger('employee_id')->nullable();
             $table->unsignedBigInteger('flat_id')->nullable();
             $table->string('note')->nullable();
-            $table->integer('number_of_family')->default(2);
+            $table->integer('number_of_family_members')->default(2);
             $table->date('entry_date')->nullable();
             $table->date('exit_date')->nullable();
             $table->timestamps();
 
-            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
-            $table->foreign('flat_id')->references('id')->on('flats')->onDelete('cascade');
+            $table->foreign('employee_id')->references('id')->on('employees');
+            $table->foreign('flat_id')->references('id')->on('flats');
         });
     }
 

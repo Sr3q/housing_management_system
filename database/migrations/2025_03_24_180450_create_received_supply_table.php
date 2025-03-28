@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -23,24 +22,20 @@ return new class extends Migration
 
             $table->foreign('flat_id')
                 ->references('id')
-                ->on('flats')
-                ->onDelete('cascade');
+                ->on('flats');
 
             // تعريف المفاتيح الخارجية
             $table->foreign('room_id')
                 ->references('id')
-                ->on('rooms')
-                ->onDelete('cascade');
+                ->on('rooms');
 
             $table->foreign('employee_id')
                 ->references('id')
-                ->on('employees')
-                ->onDelete('cascade');
+                ->on('employees');
 
             $table->foreign('supplies_id')
                 ->references('id')
-                ->on('supplies')
-                ->onDelete('cascade');
+                ->on('supplies');
         });
     }
 
