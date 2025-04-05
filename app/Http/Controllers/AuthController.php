@@ -25,6 +25,7 @@ class AuthController extends Controller
             // البحث عن المستخدم باستخدام اسم المستخدم
             $user = User::where('username', $request->username)->first();
             $user->load('roles');
+            $user->load('company');
 
             // التحقق من صحة كلمة المرور
             if (!Hash::check($request->password, $user->password)) {
@@ -38,32 +39,6 @@ class AuthController extends Controller
 
             // إعادة التوكن للمستخدم
             return $this->returnData('data', $user);
-        } catch (\Exception $ex) {
-            return $this->returnError(500, $ex->getMessage());
-        }
-    }
-
-    public function addAdmin(Request $request)
-    {
-        try {
-            $request->validate([
-                'name' => 'required',
-                'username' => 'required|string|unique:users,username',
-                'password' => 'required|min:8'
-            ]);
-
-            $user=new User();
-            $user->name=$request->name;
-            $user->username=$request->username;
-            $user->password=Hash::make($request->password);
-            $user->save();
-
-            $adminRole = Role::where('name', 'admin')->first();
-
-            $user->roles()->attach($adminRole->id);
-
-            return $this->returnSuccessMessage("Admin added successfully");
-
         } catch (\Exception $ex) {
             return $this->returnError(500, $ex->getMessage());
         }

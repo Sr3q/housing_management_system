@@ -12,7 +12,7 @@ class Company extends Model
     ];
 
     // الشركة لها العديد من المجمعات السكنية
-    public function housings()
+    public function housing()
     {
         return $this->hasMany(Housing::class, 'company_id');
     }

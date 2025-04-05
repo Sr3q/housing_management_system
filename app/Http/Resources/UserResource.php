@@ -28,8 +28,13 @@ class UserResource extends JsonResource
                 'id'         => $this->id,
                 'name'       => $this->name,
                 'username'   => $this->username,
-                'company_id' => $this->company_id,
                 'role'      => $this->roles[0]->name,
+                'company_name' => $this->whenLoaded('company', function () {
+                    return $this->company->name;
+                }),
+                'company_location' => $this->whenLoaded('company', function () {
+                    return $this->company->location;
+                }),
                 'created_at' => $this->created_at,
                 'updated_at' => $this->updated_at,
             ],

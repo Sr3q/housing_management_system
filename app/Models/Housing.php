@@ -9,6 +9,8 @@ class Housing extends Model
 {
     use SoftDeletes;
 
+    protected $table ='housing';
+
     protected $fillable = [
         'company_id',
         'name',
