@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ContractController;
 use App\Http\Controllers\HousingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -49,5 +50,12 @@ Route::group(['middleware' => ['auth:sanctum', 'housing.officer']], function (){
         Route::get('get-all/{company_id}',[HousingController::class, 'getAllHousing']);
         Route::post('/update/{id}', [HousingController::class, 'updateHousing']);
         Route::delete('/delete/{id}', [HousingController::class, 'deleteHousing']);
+    });
+
+    Route::group(['prefix' => 'contract'], function () {
+        Route::post('/add', [ContractController::class, 'addContract']);
+        Route::get('get-all/{housing_id}',[ContractController::class, 'getAllContracts']);
+        Route::post('/update/{id}', [ContractController::class, 'updateContract']);
+        Route::delete('/delete/{id}', [ContractController::class, 'deleteContract']);
     });
 });
