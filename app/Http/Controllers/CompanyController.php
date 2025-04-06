@@ -55,7 +55,7 @@ class CompanyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function updateCompany(Request $request)
+    public function updateCompany(Request $request,string $id)
     {
         try {
             $validatedData = $request->validate([
@@ -63,7 +63,7 @@ class CompanyController extends Controller
                 'location' => 'nullable|string|max:255',
             ]);
 
-            $company = Company::find($request->company_id);
+            $company = Company::find($id);
 
             if(!$company){
                 return $this->returnError(404,"Company not found");

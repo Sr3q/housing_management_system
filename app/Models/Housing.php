@@ -18,6 +18,7 @@ class Housing extends Model
         'number_of_flats',
         'number_of_rooms',
         'building_capacity',
+        'vacant_spaces',
         'ownership_type',
         'type',
         'status',

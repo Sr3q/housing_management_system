@@ -87,10 +87,11 @@ class UserController extends Controller
         }
     }
 
-    public function addHousingOfficer(Request $request, string $company_id)
+    public function addHousingOfficer(Request $request)
     {
         try {
             $request->validate([
+                'company_id' => 'required|exists:companies,id',
                 'name' => 'required',
                 'username' => 'required|string|unique:users,username',
                 'password' => 'required|min:8'
@@ -100,7 +101,7 @@ class UserController extends Controller
             $user->name = $request->name;
             $user->username = $request->username;
             $user->password = Hash::make($request->password);
-            $user->company_id = $company_id;
+            $user->company_id = $request->company_id;
             $user->save();
 
             $adminRole = Role::where('name', 'housing_officer')->first();

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\HousingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -28,16 +29,25 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
     });
 
     Route::group(['prefix' => 'housing-officer'], function () {
-        Route::post('/add/{company_id}', [UserController::class, 'addHousingOfficer']);
+        Route::post('/add', [UserController::class, 'addHousingOfficer']);
         Route::get('get-all',[UserController::class, 'getAllHousingOfficers']);
         //Route::post('/update', [UserController::class, 'updateCompany']);
         Route::delete('/delete/{id}', [UserController::class, 'deleteHousingOfficer']);
     });
 
     Route::group(['prefix' => 'company'], function () {
-        Route::post('/add', [companyController::class, 'addCompany']);
-        Route::get('get-all',[companyController::class, 'getAllCompanies']);
-        Route::post('/update', [companyController::class, 'updateCompany']);
-        Route::delete('/delete/{id}', [companyController::class, 'deleteCompany']);
+        Route::post('/add', [CompanyController::class, 'addCompany']);
+        Route::get('get-all',[CompanyController::class, 'getAllCompanies']);
+        Route::post('/update/{id}', [CompanyController::class, 'updateCompany']);
+        Route::delete('/delete/{id}', [CompanyController::class, 'deleteCompany']);
+    });
+});
+
+Route::group(['middleware' => ['auth:sanctum', 'housing.officer']], function (){
+    Route::group(['prefix' => 'housing'], function () {
+        Route::post('/add', [HousingController::class, 'addHousing']);
+        Route::get('get-all/{company_id}',[HousingController::class, 'getAllHousing']);
+        Route::post('/update/{id}', [HousingController::class, 'updateHousing']);
+        Route::delete('/delete/{id}', [HousingController::class, 'deleteHousing']);
     });
 });
