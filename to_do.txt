@@ -1,0 +1,3 @@
+attachment
+
+add room type like ctch,land,store

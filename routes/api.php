@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\HousingController;
@@ -57,5 +58,12 @@ Route::group(['middleware' => ['auth:sanctum', 'housing.officer']], function (){
         Route::get('get-all/{housing_id}',[ContractController::class, 'getAllContracts']);
         Route::post('/update/{id}', [ContractController::class, 'updateContract']);
         Route::delete('/delete/{id}', [ContractController::class, 'deleteContract']);
+    });
+
+    Route::group(['prefix' => 'attachment'], function () {
+        Route::post('/add', [AttachmentController::class, 'addAttachment']);
+        Route::get('get-all/{housing_id}',[AttachmentController::class, 'getAllAttachments']);
+        Route::post('/update/{id}', [AttachmentController::class, 'updateAttachment']);
+        Route::delete('/delete/{id}', [AttachmentController::class, 'deleteAttachment']);
     });
 });

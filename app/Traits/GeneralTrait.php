@@ -14,7 +14,7 @@ trait GeneralTrait
     {
         return response()->json([
             'status' => false,
-            'msg' => $msg
+            'message' => $msg
         ],$code);
     }
 
@@ -23,7 +23,7 @@ trait GeneralTrait
     {
         return response()->json([
             'status' => true,
-            'msg' => $msg
+            'message' => $msg
         ],200);
     }
 
@@ -31,7 +31,7 @@ trait GeneralTrait
     {
         return response()->json([
             'status' => true,
-            'msg' => $msg,
+            'message' => $msg,
             $key => $value
         ],200);
     }
