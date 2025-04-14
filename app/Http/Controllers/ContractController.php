@@ -13,7 +13,7 @@ class ContractController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function getAllContracts(string $housing_id)
+    public function getAll(string $housing_id)
     {
         try {
             $contracts = Contract::where('housing_id', $housing_id)->get();
@@ -25,7 +25,7 @@ class ContractController extends Controller
     }
 
 
-    public function addContract(Request $request)
+    public function add(Request $request)
     {
         try {
             $request->validate([
@@ -64,7 +64,7 @@ class ContractController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function updateContract(Request $request, string $id)
+    public function update(Request $request, string $id)
     {
         try {
             $validatedData = $request->validate([
@@ -96,7 +96,7 @@ class ContractController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function deleteContract(string $id)
+    public function delete(string $id)
     {
         try {
 

@@ -13,11 +13,11 @@ class CompanyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function getAllCompanies()
+    public function getAll()
     {
         try {
             $companies = Company::withCount('housing')
-                ->withSum('housing as total_capacity', 'building_capacity')
+//                ->withSum('housing as total_capacity', 'building_capacity')
                 ->with(['users' => function ($query) {
                     $query->whereHas('roles', function ($q) {
                         $q->where('name', 'housing_officer');
@@ -32,7 +32,7 @@ class CompanyController extends Controller
     }
 
 
-    public function addCompany(Request $request)
+    public function add(Request $request)
     {
         try {
             $request->validate([
@@ -55,7 +55,7 @@ class CompanyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function updateCompany(Request $request,string $id)
+    public function update(Request $request,string $id)
     {
         try {
             $validatedData = $request->validate([
@@ -80,7 +80,7 @@ class CompanyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function deleteCompany(string $id)
+    public function delete(string $id)
     {
         try {
 

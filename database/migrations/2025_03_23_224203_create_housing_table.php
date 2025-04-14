@@ -16,9 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('company_id')->nullable();
             $table->string('name')->nullable();
             $table->string('location')->nullable();
-            $table->unsignedInteger('number_of_flats')->nullable();
-            $table->unsignedInteger('number_of_rooms')->nullable();
-            $table->unsignedInteger('building_capacity')->nullable();
+//            $table->unsignedInteger('number_of_flats')->nullable();
+//            $table->unsignedInteger('number_of_rooms')->nullable();
+//            $table->unsignedInteger('building_capacity')->nullable();
+//            $table->unsignedInteger('vacant_spaces')->nullable();
             $table->string('ownership_type')->nullable();
             $table->enum('type', ['single', 'family'])->default('single');
             $table->enum('status', ['active', 'maintenance', 'inactive'])->default('active');

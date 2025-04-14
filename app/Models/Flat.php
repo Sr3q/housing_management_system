@@ -13,7 +13,7 @@ class Flat extends Model
         'flat_number',
         'housing_id',
         'area',
-        'number_of_rooms',
+//        'number_of_rooms',
         'number_of_bathrooms',
         'kitchen',
         'status',

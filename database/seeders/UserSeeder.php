@@ -15,8 +15,8 @@ class UserSeeder extends Seeder
     {
 //        User::factory(30)->create();
         DB::table('users')->insert([
-            'username' => 'housing_officer',
-            'name'=>'Officer Name',
+            'username' => 'admin',
+            'name'=>'admin Name',
             'password' => Hash::make('12345678'),
         ]);
     }

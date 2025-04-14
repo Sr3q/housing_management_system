@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('flat_number');
             $table->unsignedBigInteger('housing_id');
             $table->float('area')->nullable();
-            $table->integer('number_of_rooms')->default(0);
+//            $table->integer('number_of_rooms')->default(0);
             $table->integer('number_of_bathrooms')->default(0);
             $table->boolean('kitchen')->default(true);
             $table->enum('status', ['vacant', 'occupied', 'maintenance'])->default('vacant');

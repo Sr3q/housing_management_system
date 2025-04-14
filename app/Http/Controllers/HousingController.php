@@ -13,7 +13,7 @@ class HousingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function getAllHousing(string $company_id)
+    public function getAll(string $company_id)
     {
         try {
             $housing = Housing::where('company_id', $company_id)->get();
@@ -25,7 +25,7 @@ class HousingController extends Controller
     }
 
 
-    public function addHousing(Request $request)
+    public function add(Request $request)
     {
         try {
             $request->validate([
@@ -60,7 +60,7 @@ class HousingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function updateHousing(Request $request,string $id)
+    public function update(Request $request,string $id)
     {
         try {
             $validatedData = $request->validate([
@@ -90,7 +90,7 @@ class HousingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function deleteHousing(string $id)
+    public function delete(string $id)
     {
         try {
 

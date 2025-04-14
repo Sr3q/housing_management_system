@@ -14,7 +14,7 @@ class AttachmentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function getAllAttachments(string $housing_id)
+    public function getAll(string $housing_id)
     {
         try {
             $attachment = Attachment::where('housing_id', $housing_id)->get();
@@ -26,7 +26,7 @@ class AttachmentController extends Controller
     }
 
 
-    public function addAttachment(Request $request)
+    public function add(Request $request)
     {
         try {
             $request->validate([
@@ -57,7 +57,7 @@ class AttachmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function updateAttachment(Request $request,string $id)
+    public function update(Request $request,string $id)
     {
         try {
             $request->validate([
@@ -94,7 +94,7 @@ class AttachmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function deleteAttachment(string $id)
+    public function delete(string $id)
     {
         try {
 

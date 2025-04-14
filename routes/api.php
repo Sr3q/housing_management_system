@@ -3,6 +3,7 @@
 use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ContractController;
+use App\Http\Controllers\FlatController;
 use App\Http\Controllers\HousingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,8 @@ use App\Http\Controllers\AuthController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
+
+////////////////////////// admin ///////////////////////////////////////
 Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
 
     Route::group(['prefix' => 'admin'], function () {
@@ -38,32 +41,41 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
     });
 
     Route::group(['prefix' => 'company'], function () {
-        Route::post('/add', [CompanyController::class, 'addCompany']);
-        Route::get('get-all',[CompanyController::class, 'getAllCompanies']);
-        Route::post('/update/{id}', [CompanyController::class, 'updateCompany']);
-        Route::delete('/delete/{id}', [CompanyController::class, 'deleteCompany']);
+        Route::post('/add', [CompanyController::class, 'add']);
+        Route::get('get-all',[CompanyController::class, 'getAll']);
+        Route::post('/update/{id}', [CompanyController::class, 'update']);
+        Route::delete('/delete/{id}', [CompanyController::class, 'delete']);
     });
 });
 
+///////////////////////////////housing officer and admin////////////////////////////
+
 Route::group(['middleware' => ['auth:sanctum', 'housing.officer']], function (){
     Route::group(['prefix' => 'housing'], function () {
-        Route::post('/add', [HousingController::class, 'addHousing']);
-        Route::get('get-all/{company_id}',[HousingController::class, 'getAllHousing']);
-        Route::post('/update/{id}', [HousingController::class, 'updateHousing']);
-        Route::delete('/delete/{id}', [HousingController::class, 'deleteHousing']);
+        Route::post('/add', [HousingController::class, 'add']);
+        Route::get('get-all/{company_id}',[HousingController::class, 'getAll']);
+        Route::post('/update/{id}', [HousingController::class, 'update']);
+        Route::delete('/delete/{id}', [HousingController::class, 'delete']);
     });
 
     Route::group(['prefix' => 'contract'], function () {
-        Route::post('/add', [ContractController::class, 'addContract']);
-        Route::get('get-all/{housing_id}',[ContractController::class, 'getAllContracts']);
-        Route::post('/update/{id}', [ContractController::class, 'updateContract']);
-        Route::delete('/delete/{id}', [ContractController::class, 'deleteContract']);
+        Route::post('/add', [ContractController::class, 'add']);
+        Route::get('get-all/{housing_id}',[ContractController::class, 'getAll']);
+        Route::post('/update/{id}', [ContractController::class, 'update']);
+        Route::delete('/delete/{id}', [ContractController::class, 'delete']);
     });
 
     Route::group(['prefix' => 'attachment'], function () {
-        Route::post('/add', [AttachmentController::class, 'addAttachment']);
-        Route::get('get-all/{housing_id}',[AttachmentController::class, 'getAllAttachments']);
-        Route::post('/update/{id}', [AttachmentController::class, 'updateAttachment']);
-        Route::delete('/delete/{id}', [AttachmentController::class, 'deleteAttachment']);
+        Route::post('/add', [AttachmentController::class, 'add']);
+        Route::get('get-all/{housing_id}',[AttachmentController::class, 'getAll']);
+        Route::post('/update/{id}', [AttachmentController::class, 'update']);
+        Route::delete('/delete/{id}', [AttachmentController::class, 'delete']);
+    });
+
+    Route::group(['prefix' => 'flat'], function () {
+        Route::post('/add', [FlatController::class, 'add']);
+        Route::get('get-all/{housing_id}',[FlatController::class, 'getAll']);
+        Route::post('/update/{id}', [FlatController::class, 'update']);
+        Route::delete('/delete/{id}', [FlatController::class, 'delete']);
     });
 });
