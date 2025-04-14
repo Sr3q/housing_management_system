@@ -15,6 +15,7 @@ class Room extends Model
         'housing_id',
         'capacity',
         'status',
+        'type',
     ];
 
     // الغرفة تنتمي إلى شقة (اختياري)

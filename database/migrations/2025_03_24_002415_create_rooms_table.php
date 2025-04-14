@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -18,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('housing_id')->nullable();
             $table->integer('capacity')->default(1);
             $table->enum('status', ['vacant', 'occupied', 'maintenance'])->default('vacant');
+            $table->enum('type', ['living', 'storehouse', 'bathroom', 'kitchen', 'laundry'])->default('living');
             $table->timestamps();
 
             $table->softDeletes();

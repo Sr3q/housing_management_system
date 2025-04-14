@@ -30,7 +30,7 @@ class FlatController extends Controller
         try {
             $request->validate([
                 'housing_id' => 'required|exists:housing,id',
-                'flat_number' => 'required|string|max:255',
+                'flat_number' => 'required|string',
                 'area' => 'nullable|numeric|min:0',
                 'number_of_bathrooms' => 'required|integer|min:0',
                 'kitchen' => 'required|boolean',
@@ -63,7 +63,7 @@ class FlatController extends Controller
         try {
             $validatedData = $request->validate([
                 'housing_id' => 'required|exists:housing,id',
-                'flat_number' => 'required|string|max:255',
+                'flat_number' => 'required|string',
                 'area' => 'nullable|numeric|min:0',
                 'number_of_bathrooms' => 'required|integer|min:0',
                 'kitchen' => 'required|boolean',

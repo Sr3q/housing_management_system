@@ -5,6 +5,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\FlatController;
 use App\Http\Controllers\HousingController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -77,5 +78,12 @@ Route::group(['middleware' => ['auth:sanctum', 'housing.officer']], function (){
         Route::get('get-all/{housing_id}',[FlatController::class, 'getAll']);
         Route::post('/update/{id}', [FlatController::class, 'update']);
         Route::delete('/delete/{id}', [FlatController::class, 'delete']);
+    });
+
+    Route::group(['prefix' => 'room'], function () {
+        Route::post('/add', [RoomController::class, 'add']);
+        Route::get('get-all/{housing_id}/{flat_id}',[RoomController::class, 'getAll']);
+        Route::post('/update/{id}', [RoomController::class, 'update']);
+        Route::delete('/delete/{id}', [RoomController::class, 'delete']);
     });
 });
