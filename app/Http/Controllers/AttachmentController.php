@@ -37,7 +37,7 @@ class AttachmentController extends Controller
             $file = $request->file('file');
             $filePath = $file->store('attachments', 'public');
 
-            $attachment = Attachment::create([
+            Attachment::create([
                 'housing_id' => $request->housing_id,
                 'file_name' => $file->getClientOriginalName(),
                 'file_path' => $filePath,
